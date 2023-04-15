@@ -63,7 +63,7 @@ const HomePage = () => {
 
     return (
         <Stack
-            sx={{ display: 'flex', height: '100%', justifyContent: 'space-between' }}
+            sx={{ display: 'flex', height: '100%', justifyContent: 'space-between', justifyItems: 'center', alignItems: 'center' }}
         >
             <Header bg borderBottom>
                 <Box sx={{
@@ -117,19 +117,22 @@ const HomePage = () => {
                             }}>
                                 {index === messages.length - 1 ? (
                                     item.type === messageType.answer ? (
-                                        <TypeWriter onInit={(writer) => {
-                                            writer.typeString(item.content)
-                                                .callFunction(() => {
-                                                    document.querySelector(".Typewriter__cursor").style.display = "none";
+                                        <TypeWriter
+                                            options={{ delay: 1 }} // Set typing delay here
+                                            onInit={(writer) => {
+                                                writer
+                                                    .typeString(item.content)
+                                                    .callFunction(() => {
+                                                        document.querySelector(".Typewriter__cursor").style.display = "none";
 
-                                                    setOnRequest(false);
-                                                    setTimeout(() => {
-                                                        inputRef.current.focus();
-                                                    }, 200);
-                                                })
-                                                .changeDelay(50)
-                                                .start();
-                                        }} />
+                                                        setOnRequest(false);
+                                                        setTimeout(() => {
+                                                            inputRef.current.focus();
+                                                        }, 10);
+                                                    })
+                                                    .start();
+                                            }}
+                                        />
                                     ) : item.content
                                 ) : (
                                     item.content
@@ -147,6 +150,7 @@ const HomePage = () => {
                 borderTop="1px solid #2c2c2c"
                 bgcolor="#000"
                 zIndex={3}
+                sx={{ flexGrow: 1 }}
             >
                 <Box
                     padding={2}

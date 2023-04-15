@@ -8,3 +8,6 @@ venv/
 
 # Local development settings
 .env
+
+# Session data
+/flask_session
